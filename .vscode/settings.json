@@ -1,0 +1,12 @@
+{
+  "rust-analyzer.cargo.buildScripts.overrideCommand": [
+    "cargo",
+    "+esp",
+    "check",
+    "--quiet",
+    "--workspace",
+    "--message-format=json",
+    "--all-targets"
+  ],
+  // "rust-analyzer.linkedProjects": ["./export-ts/Cargo.toml", "./types/Cargo.toml"]
+}
