@@ -17,8 +17,14 @@ use std::{str, thread::sleep, time::Duration};
 use types::Pixel;
 use ws2812_esp32_rmt_driver::Ws2812Esp32Rmt;
 
-const SSID: &str = "YOUR_SSID";
-const PASSWORD: &str = "YOUR_PASSWORD";
+const SSID: &str = match option_env!("YOUR_SSID") {
+    Some(v) => v,
+    None => "YOUR_SSID",
+};
+const PASSWORD: &str = match option_env!("YOUR_PASSWORD") {
+    Some(v) => v,
+    None => "YOUR_PASSWORD",
+};
 
 const STACK_SIZE: usize = 0x4000;
 
