@@ -35,30 +35,30 @@ fn main() -> anyhow::Result<()> {
     esp_idf_sys::link_patches();
     EspLogger::initialize_default();
 
-    let peripherals = Peripherals::take()?;
-    let mut neo_pixel = Mutex::new(Ws2812Esp32Rmt::new(
-        peripherals.rmt.channel0,
-        peripherals.pins.gpio17,
-    )?);
-    let led_data = Mutex::new(
-        (0..NUM_LEDS)
-            .map(|_| Pixel::new(0, 0, 0))
-            .collect::<Vec<_>>(),
-    );
-
-    write_led_data(&mut neo_pixel, &led_data)?;
-
     ThreadSpawnConfiguration {
         name: Some(b"LED-THREAD\0"),
         stack_size: STACK_SIZE,
-        priority: 1,
+        priority: 24,
         ///! I tried putting that to 24 and 1 and both times had flickering.
-        pin_to_core: Some(Core::Core1),
+        pin_to_core: Some(Core::Core0),
         ..Default::default()
     }
     .set()?;
 
     std::thread::spawn(move || -> anyhow::Result<()> {
+        let peripherals = Peripherals::take()?;
+        let mut neo_pixel = Mutex::new(Ws2812Esp32Rmt::new(
+            peripherals.rmt.channel0,
+            peripherals.pins.gpio17,
+        )?);
+        let led_data = Mutex::new(
+            (0..NUM_LEDS)
+                .map(|_| Pixel::new(0, 0, 0))
+                .collect::<Vec<_>>(),
+        );
+
+        write_led_data(&mut neo_pixel, &led_data)?;
+
         loop {
             for pixel in &mut *led_data.lock() {
                 pixel.rainbow_tick();
@@ -70,6 +70,7 @@ fn main() -> anyhow::Result<()> {
         }
     });
 
+    let peripherals = Peripherals::take()?;
     let sys_loop = EspSystemEventLoop::take()?;
     let nvs = EspDefaultNvsPartition::take()?;
     let timer_service = EspTaskTimerService::new()?;
