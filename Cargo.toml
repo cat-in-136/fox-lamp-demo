@@ -30,7 +30,7 @@ esp-idf-hal = { version = "0.42", optional = true, default-features = false }
 esp-idf-svc = { version = "0.47.3" }
 embedded-svc = { version = "0.26", optional = true, default-features = false }
 smart-leds = "0.3.0"
-ws2812-esp32-rmt-driver = "0.6.0"
+ws2812-esp32-rmt-driver = "0.7.0"
 lazy_static = "1.4.0"
 parking_lot = "0.12.1"
 anyhow = "1.0.75"

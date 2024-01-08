@@ -2087,15 +2087,15 @@ dependencies = [
 
 [[package]]
 name = "ws2812-esp32-rmt-driver"
-version = "0.6.0"
+version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "412b5a4d8370088e2b02f6f4ab8ac4d4683d8692aec83bbb52c599f859f5e861"
+checksum = "6014cc50727a766afb4f4a22d227a23b7f28831fa1d0b45133a24eabdf823d15"
 dependencies = [
  "anyhow",
  "embedded-graphics-core",
  "embuild",
+ "esp-idf-hal",
  "esp-idf-sys",
- "once_cell",
  "smart-leds-trait",
  "thiserror",
 ]

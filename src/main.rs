@@ -26,11 +26,15 @@ const STACK_SIZE: usize = 0x4000;
 const _FRONTEND_URL: &str = "http://192.168.194.11:3000";
 
 const NUM_LEDS: usize = 100;
-const GPIO_PIN: u32 = 17;
 
 lazy_static! {
-    pub static ref NEO_PIXELS: Mutex<Ws2812Esp32Rmt> =
-        Mutex::new(Ws2812Esp32Rmt::new(0, GPIO_PIN).unwrap());
+    pub static ref NEO_PIXELS: Mutex<Ws2812Esp32Rmt<'static>> = Mutex::new(
+        Ws2812Esp32Rmt::new(
+            Peripherals::take().unwrap().rmt.channel0,
+            Peripherals::take().unwrap().pins.gpio17
+        )
+        .unwrap()
+    );
     pub static ref LED_DATA: Mutex<[Pixel; NUM_LEDS]> = Mutex::new(generate_full_array(0, 0, 0));
 }
 
