@@ -127,7 +127,7 @@ async fn connect_wifi(wifi: &mut AsyncWifi<EspWifi<'static>>) -> anyhow::Result<
     Ok(())
 }
 
-fn create_server() -> anyhow::Result<EspHttpServer> {
+fn create_server() -> anyhow::Result<EspHttpServer<'static>> {
     let server_configuration = esp_idf_svc::http::server::Configuration {
         stack_size: STACK_SIZE,
         max_sessions: 8,

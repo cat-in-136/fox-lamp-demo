@@ -4,7 +4,6 @@ version = "0.1.0"
 authors = ["RoyalFoxy <sepp.toni.mo@gmail.com>"]
 edition = "2021"
 resolver = "2"
-rust-version = "1.75"
 
 [profile.release]
 opt-level = "s"
@@ -22,14 +21,14 @@ std = ["alloc", "esp-idf-sys/std", "esp-idf-sys/binstart", "embedded-svc?/std", 
 alloc = ["embedded-svc?/alloc", "esp-idf-hal?/alloc", "esp-idf-svc/alloc"]
 nightly = ["embedded-svc?/nightly", "esp-idf-svc/nightly"]
 experimental = ["embedded-svc?/experimental", "esp-idf-svc/experimental"]
-embassy = ["esp-idf-hal?/embassy-sync", "esp-idf-hal?/critical-section", "esp-idf-hal?/edge-executor", "esp-idf-svc/embassy-time-driver", "esp-idf-svc/embassy-time-isr-queue"]
+embassy = ["esp-idf-hal?/embassy-sync", "esp-idf-hal?/critical-section", "esp-idf-svc/embassy-time-driver", "esp-idf-svc/embassy-time-isr-queue"]
 
 [dependencies]
 log = { version = "0.4.17", default-features = false }
 esp-idf-sys = { version = "0.33", default-features = false }
-esp-idf-hal = { version = "0.41", optional = true, default-features = false }
-esp-idf-svc = { version = "0.46.2" }
-embedded-svc = { version = "0.25", optional = true, default-features = false }
+esp-idf-hal = { version = "0.42", optional = true, default-features = false }
+esp-idf-svc = { version = "0.47.3" }
+embedded-svc = { version = "0.26", optional = true, default-features = false }
 smart-leds = "0.3.0"
 ws2812-esp32-rmt-driver = "0.6.0"
 lazy_static = "1.4.0"
